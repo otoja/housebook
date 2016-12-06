@@ -2,12 +2,7 @@ body {
   padding: 20px;
   font-family: "Century Gothic", "Helvetica", sans-serif;
   padding-bottom: 70px;
-  /*padding-top:60px;*/
   background-color: #f1f0ee;
-  /*    background-image: url('/images/home-vector3.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;*/
-  /*background-position: 0 -50%;*/
 }
 a {
   color: #7acfd6;
@@ -18,7 +13,6 @@ footer {
   border: none;
 }
 nav {
-  /*background-color: @light-grey;*/
   color: #b11a21 !important;
   font-size: 24px;
 }

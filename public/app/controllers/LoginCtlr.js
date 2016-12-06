@@ -10,8 +10,6 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, AuthS
                     $rootScope.$apply();
                 });
             });
-
-
         });
     };
 
