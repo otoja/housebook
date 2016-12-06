@@ -2,7 +2,7 @@ body {
   padding: 20px;
   font-family: "Century Gothic", "Helvetica", sans-serif;
   padding-bottom: 70px;
-  padding-top: 60px;
+  /*padding-top:60px;*/
   background-color: #f1f0ee;
   /*    background-image: url('/images/home-vector3.jpg');
         background-repeat: no-repeat;
@@ -23,9 +23,16 @@ nav {
   font-size: 24px;
 }
 nav .navbar-brand {
-  color: #b11a21;
+  color: #b11a21 !important;
   font-weight: bolder;
   font-size: 24px;
+  line-height: normal;
+}
+nav .navbar-text {
+  color: #b11a21 !important;
+}
+nav .navbar-form {
+  border: none;
 }
 nav .navbar-form button {
   background-color: #e0474c;
