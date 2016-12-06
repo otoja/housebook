@@ -5,8 +5,8 @@ body {
   padding-top: 60px;
   background-color: #f1f0ee;
   /*    background-image: url('/images/home-vector3.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;*/
+        background-repeat: no-repeat;
+        background-size: cover;*/
   /*background-position: 0 -50%;*/
 }
 a {
@@ -105,5 +105,12 @@ nav .navbar-form button {
 }
 .modal .modal-footer {
   background-color: white;
+}
+.btn-feedback {
+  /*background-color: @curry;*/
+  float: right;
+  margin-top: 7px;
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 /*# sourceMappingURL=style.css.map */
