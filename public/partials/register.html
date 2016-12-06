@@ -1,0 +1,32 @@
+<div class=" ">
+    <!--<div id="logo"></div>-->
+    <div class="col-xs-12">
+
+        <form name="createAccountForm" ng-init="user={}" class="form-login" ng-submit="signUp(user)" novalidate>
+            <h2 class="form-signin-heading text-center">Create account</h2>
+            <label for="signupUserName" class="sr-only">User name</label>
+            <input type="text" id="signupUserName" class="form-control" name="username" placeholder="User name" ng-model="user.username" required="" autofocus="">
+            <br>
+            <label for="signupFirstName" class="sr-only">First name</label>
+            <input type="text" id="signupFirstName" name="signupFirstName" class="form-control" placeholder="First name" ng-model="user.firstName" required="" >
+            <br>
+            <label for="signupLastName" class="sr-only">Last name</label>
+            <input type="text" id="signupLastName" class="form-control" placeholder="Last name" ng-model="user.lastName" required="">
+            <br>
+            <label for="email" class="sr-only">Email address</label>
+            <input type="email" id="email" class="form-control" placeholder="Email address" ng-model="user.email" required="" >
+            <br>
+            <label for="loginPassword" class="sr-only">Password</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Password" ng-model="user.password" required="">
+            <br>
+            <label for="loginRepeatPassword" class="sr-only">Repeat password</label>
+            <input type="password" id="loginRepeatPassword" class="form-control" placeholder="Repeat password" ng-model="user.repeatPassword" required="">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="terms"> Accept terms and conditions
+                </label>
+            </div>
+            <button class="btn btn-lg btn-block" type="submit">Signup</button>
+        </form>
+    </div>
+</div>

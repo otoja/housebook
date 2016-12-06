@@ -1,0 +1,155 @@
+@brand-bg-lighter: #D3E9EC;
+@brand-bg-lighter-a: rgba(211,233,236,0.4);
+@brand-bg-darker: #60A69C;
+@brand-font-rgba: rgba(108,100,87,0.9);
+@brand-font-rgb: rgb(108,100,87);
+
+@emerald: #4abdac;
+@orange-dark: #fc4a1a;
+@curry: #f78733;
+
+
+@light-grey:#f1f0ee;
+@deep-red:#b11a21;
+@lighter-red:#e0474c;
+@light-blue:#7acfd6;
+
+body {
+    padding: 20px;
+    font-family: "Century Gothic", "Helvetica", sans-serif;
+    padding-bottom: 70px; 
+    padding-top:60px;
+    background-color: @light-grey;
+/*    background-image: url('/images/home-vector3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;*/
+    /*background-position: 0 -50%;*/
+    
+}
+
+a {
+    color: @light-blue;
+    cursor: pointer;
+}
+footer{
+    background-color: @light-grey;
+    border:none;
+}
+
+nav{
+    /*background-color: @light-grey;*/
+    color:@deep-red !important;
+    font-size: 24px;
+
+    .navbar-brand{
+        color:@deep-red;
+        font-weight: bolder;
+        font-size: 24px;
+    }
+    .navbar-form{
+        button{
+            background-color: @lighter-red;
+        }
+    }
+}
+#logo{
+    background-image: url(../..//images/logo-1-line.png);
+    height:100px;
+    background-size: auto 90%;
+    background-position: 43% 100%;
+    background-repeat: no-repeat;
+}
+
+.form-login{
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
+    padding: 10px 40px 20px 40px;
+    margin:20px 0 20px 0;
+    background-color:white;
+
+    input{
+        border-color: @brand-bg-lighter;
+    }
+
+
+    h2{
+        color: @brand-font-rgb;
+        text-transform: uppercase;
+    }
+    button{
+        background-color: @lighter-red;
+        color:white;
+    }
+}
+.main-container{
+    padding:0px;
+    background-image: url('/images/home-vector.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    background-position: 20% 50%;
+}
+
+
+.marketing{
+    text-align: center;
+    
+
+    .heading{
+        color: @lighter-red;
+        text-shadow: 0px 1px 0px rgba(255,255,255,.5), 0px -1px 0px rgba(0,0,0,.5);
+        
+    }
+
+    .marketing-tag{
+        color:@lighter-red;
+        text-shadow: 0px 1px 0px @light-grey, 0px -1px 0px @orange-dark;
+        line-height: 30px;
+
+        font-size: 26px;
+        font-weight: bolder;
+    }
+    .marketing-description{
+        padding:10px;
+        text-align: justify;
+        color:@brand-font-rgb;
+    }
+}
+
+
+.houses-grid{
+    .house-space-on-grid{
+        width:300px;
+        height:300px;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
+        background-color:white;
+        cursor:pointer;
+
+        div.lead{
+            padding: 10px 10px 0px 10px; 
+            color:@deep-red;
+        }
+        
+        .pull-right>.dropdown-menu{
+            right:-180px;
+        }
+    }
+}
+
+.modal{
+    
+    
+    .modal-header{
+        background-color: @lighter-red;
+        color:white;
+        text-align: center;
+    }
+    .modal-footer{
+        background-color:white;
+    }
+}
+
+
