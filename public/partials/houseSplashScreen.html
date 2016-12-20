@@ -1,56 +1,16 @@
 <div class="houses-grid">
-    <div ng-repeat="house in houses" class="clearfix">
-        <div class="house-space-on-grid">
-            This is my house
+    <div ng-repeat="house in houses" class="">
+        <div class="house-space-on-grid" ng-click="openProfile()">
+            <div class="lead text-uppercase text-center" ><a ng-href="#/house/{{house.ref}}">{{house.name}}</a>
+            </div>
+            <img ng-if="!house.thumbnail" src="../images/house-default.jpg" alt="Default house picture" class="center-block">
+            <img ng-show="house.thumbnail" id="userImg" ng-src="/img/{{house.ref}}/thumbnail.png" class="center-block">
+            <p class="text-muted lead text-center">{{house.description}}</p>
         </div>
     </div>
-    <div ng-if="!houses.length" class="clearfix ">
-        <div ng-click="openProfile()" class="house-space-on-grid center-block">
-            <div class="lead text-uppercase text-center" >{{defaultHouseSpace.name}}
-                <a ng-click="$event.preventDefault()" data-toggle="modal" data-target="#basicPropertiesModal" title="Quick settings" >
-                    <i class="glyphicon glyphicon-cog" ></i>
-                </a>
-            </div>
-            <img ng-if="!defaultHouseSpace.img" src="../images/house-default.jpg" alt="Default house picture" class="center-block">
-            <img ng-show="defaultHouseSpace.img" id="userImg" class="center-block">
-            <p class="text-muted lead text-center">{{defaultHouseSpace.description}}</p>
-        </div>
+    <div ng-click="goToCreateProfilePage()" class="house-space-on-grid">
+        <div class="lead text-uppercase text-center" >Add new... </div>
+        <img src="../images/house-default.jpg" alt="Default house picture" class="center-block">
+        <p class="text-muted lead text-center">Create new house profile</p>
     </div>
-    <br>
-    <button class="btn btn-lg btn-danger center-block">Add new..</button>
-</div>
-
-<div id="basicPropertiesModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header heading">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">House space properties</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form">
-                    <div class="form-group">
-                        <label for="title">House space name</label>
-                        <input type="text" class="form-control" id="title" placeholder="House space name" ng-model="defaultHouseSpace.name" required="">
-                    </div>
-                    <div class="form-group">
-                        <label  for="file">House profile picture</label>
-                        <input type="file" id="file" class="form-control" ng-model="defaultHouseSpace.img" accept="image/*">
-
-                    </div>
-                    <div class="form-group">
-                        <label  for="comment">Description</label>
-                        <input class="form-control" id="comment" placeholder="Comment" ng-model="defaultHouseSpace.description" >
-                    </div>
-                    
-                    <input type="hidden" name="userId" ng-model="user._id">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" ng-click="setFile()" data-dismiss="modal">Preview changes</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
 </div>

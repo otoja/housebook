@@ -1,27 +1,15 @@
-@brand-bg-lighter: #D3E9EC;
-@brand-bg-lighter-a: rgba(211,233,236,0.4);
-@brand-bg-darker: #60A69C;
-@brand-font-rgba: rgba(108,100,87,0.9);
-@brand-font-rgb: rgb(108,100,87);
-
-@emerald: #4abdac;
-@orange-dark: #fc4a1a;
-@curry: #f78733;
-
-@light-grey:#f1f0ee;
-@deep-red:#b11a21;
-@lighter-red:#e0474c;
-@light-blue:#7acfd6;
+@import "colors.less";
 
 body {
     padding: 20px;
-    font-family: "Century Gothic", "Helvetica", sans-serif;
+    font: 1em/1.750em "Open Sans", sans-serif;
+    font-size: 14pt;
     padding-bottom: 70px; 
     background-color: @light-grey;
 }
 
 a {
-    color: @light-blue;
+    color: @deep-red;
     cursor: pointer;
 }
 footer{
@@ -31,13 +19,13 @@ footer{
 
 nav{
     color:@deep-red !important;
-    font-size: 24px;
+    font: 300 1.5em/1.1em "Lobster", sans-serif;
+    text-align: center;
 
     .navbar-brand{
         color:@deep-red !important;
         font-weight: bolder;
-        font-size: 24px;
-        line-height: normal;
+        font-size: 28px;
     }
     .navbar-text{
         color:@deep-red !important;
@@ -113,6 +101,8 @@ nav{
 
 
 .houses-grid{
+    display:block;
+
     .house-space-on-grid{
         width:300px;
         height:300px;
@@ -121,11 +111,17 @@ nav{
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
         background-color:white;
         cursor:pointer;
+        display:inline-block;
+        float:left;
+        margin:10px;
+        
 
-        div.lead{
+        div.lead, a{
             padding: 10px 10px 0px 10px; 
             color:@deep-red;
+            font-family: "Scada";
         }
+        
 
         .pull-right>.dropdown-menu{
             right:-180px;

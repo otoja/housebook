@@ -1,11 +1,16 @@
+/* 
+    Created on : 2016-12-15, 10:34:17
+    Author     : Kamila Przychodzen <kamila.przychodzen@gmail.com>
+*/
 body {
   padding: 20px;
-  font-family: "Century Gothic", "Helvetica", sans-serif;
+  font: 1em/1.75em "Open Sans", sans-serif;
+  font-size: 14pt;
   padding-bottom: 70px;
   background-color: #f1f0ee;
 }
 a {
-  color: #7acfd6;
+  color: #b11a21;
   cursor: pointer;
 }
 footer {
@@ -14,13 +19,13 @@ footer {
 }
 nav {
   color: #b11a21 !important;
-  font-size: 24px;
+  font: 300 1.5em/1.1em "Lobster", sans-serif;
+  text-align: center;
 }
 nav .navbar-brand {
   color: #b11a21 !important;
   font-weight: bolder;
-  font-size: 24px;
-  line-height: normal;
+  font-size: 28px;
 }
 nav .navbar-text {
   color: #b11a21 !important;
@@ -83,6 +88,9 @@ nav .navbar-form button {
   text-align: justify;
   color: #6c6457;
 }
+.houses-grid {
+  display: block;
+}
 .houses-grid .house-space-on-grid {
   width: 300px;
   height: 300px;
@@ -91,10 +99,15 @@ nav .navbar-form button {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.65);
   background-color: white;
   cursor: pointer;
+  display: inline-block;
+  float: left;
+  margin: 10px;
 }
-.houses-grid .house-space-on-grid div.lead {
+.houses-grid .house-space-on-grid div.lead,
+.houses-grid .house-space-on-grid a {
   padding: 10px 10px 0px 10px;
   color: #b11a21;
+  font-family: "Scada";
 }
 .houses-grid .house-space-on-grid .pull-right > .dropdown-menu {
   right: -180px;

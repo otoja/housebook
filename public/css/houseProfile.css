@@ -1,0 +1,44 @@
+/* 
+    Created on : 2016-12-13, 23:19:18
+    Author     : Kamila Przychodzen <kamila.przychodzen@gmail.com>
+*/
+/* 
+    Created on : 2016-12-15, 10:34:17
+    Author     : Kamila Przychodzen <kamila.przychodzen@gmail.com>
+*/
+.house-profile h2 {
+  font: 400 3.5em/1.1em "Scada", sans-serif;
+  color: #e0474c;
+}
+.house-profile .nav {
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.house-profile .nav a {
+  color: #b11a21;
+  font: 400 1.5em/1.2em 'Open Sans', sans-serif;
+}
+.house-profile .house-profile-preferences {
+  background-color: white;
+  padding: 20px;
+}
+.house-profile .house-profile-preferences p {
+  color: grey;
+}
+.house-profile .house-profile-picture {
+  background-color: white;
+  margin-bottom: 15px;
+}
+.house-profile .house-profile-picture a {
+  padding: 10px 10px 0 0;
+  color: #7acfd6;
+  text-decoration: none;
+}
+.house-profile .house-profile-picture img {
+  height: 300px;
+  max-width: 350px;
+  padding: 20px;
+  overflow: hidden;
+}
+/*# sourceMappingURL=houseProfile.css.map */

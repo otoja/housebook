@@ -19,10 +19,10 @@ housebook.controller('MainCtlr', function ($scope, $rootScope) {
             dataType: "json"
         }).then(function () {
             _.defer(function () {
-                $scope.formSent = true;
+
                 $scope.$apply();
             });
-
         });
+        $scope.formSent = true;
     };
 });
