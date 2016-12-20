@@ -11,7 +11,7 @@ housebook.controller('HouseCtlr', function ($scope, $rootScope, $location, House
     $scope.saveHouseProfile = function (profile) {
         console.log(JSON.stringify(profile));
         HouseProfileSvc.createProfile(profile).then(function (response) {
-            $location.path('/house/'+response._id);
+            $location.path('/house/'+response.data);
             return false;
         });
     };
