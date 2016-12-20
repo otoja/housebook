@@ -11,15 +11,14 @@ housebook.controller('MainCtlr', function ($scope, $rootScope) {
 
     };
 
-    $scope.sentMail = function (name, email, message) {
+    $scope.sentMail = function (email, message) {
         $.ajax({
-            url: "https://formspree.io/shagrin84@gmail.com",
+            url: "/mail",
             method: "POST",
-            data: {message: message, _subject: "New contact form pilot application", replyTo: email},
+            data: {content: message, subject: "New contact form pilot application", replyTo: email},
             dataType: "json"
         }).then(function () {
             _.defer(function () {
-
                 $scope.$apply();
             });
         });
