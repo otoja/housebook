@@ -1,4 +1,4 @@
-housebook.service('AuthSvc', function ($q, $http, $location) {
+housebook.factory('AuthSvc', function ($q, $http, $location) {
     var obj = {};
     obj._sessionIsValid = false;
 

@@ -9,7 +9,7 @@ var usersAPI = require('./controllers/api/user');
 var sessionAPI = require('./controllers/api/sessions');
 var houseAPI = require('./controllers/api/house');
 var mailerAPI = require('./controllers/api/mailer');
-
+var awsAPI = require('./controllers/api/aws');
 
 var app = express();
 
@@ -29,6 +29,7 @@ app.use('/session', sessionAPI);
 app.use('/users', usersAPI);
 app.use('/house', houseAPI);
 app.use('/mail', mailerAPI);
+app.use('/aws', awsAPI);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
