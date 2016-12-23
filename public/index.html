@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/houseProfile.css">
 
-        
+
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Scada:700' rel='stylesheet' type='text/css'>
@@ -24,78 +24,98 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head>
-    <body ng-app="housebook">
-        <div ng-controller="MainCtlr">
-            <!-- header -->
-            <nav class="navbar navbar-default" ng-controller="LoginCtlr">
-                <div class="container-fluid">
 
-                    <div class="navbar-header">
-                        <button ng-if="!user" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#/house">Housebook</a>
-                    </div>
-                    <div ng-if="user" class="navbar-right">
-                        <ul class="nav navbar-nav">
-                            <li><a  href="#/house" >Home</a></li>
-                            <li><a  href="">Belongings</a></li>
-                            <li><a  href="" >News</a></li>
-                            <li><a  href="" >Invite</a></li>
-                            <li><a  href="" >FAQ</a></li>
-                            <li><a  href="" ng-click="logOut()">Log out</a></li>
-                        </ul>
-                    </div>
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function () {
+                var u = "//stark-dawn-40193.herokuapp.com/";
+                _paq.push(['setTrackerUrl', u + 'piwik.php']);
+                _paq.push(['setSiteId', 1]);
+                var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+                g.type = 'text/javascript';
+                g.async = true;
+                g.defer = true;
+                g.src = u + 'piwik.js';
+                s.parentNode.insertBefore(g, s);
+            })();
+        </script>
+    <noscript><p><img src="//stark-dawn-40193.herokuapp.com/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</head>
+<body ng-app="housebook">
+    <div ng-controller="MainCtlr">
+        <!-- header -->
+        <nav class="navbar navbar-default" ng-controller="LoginCtlr">
+            <div class="container-fluid">
 
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <form class="navbar-form navbar-right" ng-submit="login(user.username, user.password)"  ng-if="!user">
-                            <div class="form-group">
-                                <input type="text" placeholder="Username" ng-model="user.username" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="Password" ng-model="user.password" class="form-control">
-                            </div>
-                            <button type="submit" class="btn btn-warning">Login</button>
-                        </form>
-                    </div>
+                <div class="navbar-header">
+                    <button ng-if="!user" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/house">Housebook</a>
                 </div>
-            </nav>
-
-            <div ng-view></div>
-
-            <!--footer-->
-            <footer class="navbar navbar-default navbar-fixed-bottom">
-                <div class="container-fluid">
-                    <button class="btn btn-success btn-feedback" ng-click="initContactForm()" >Send us your feedback!</button>
-                    <p class="navbar-text">Housebook &COPY; 2016</p>
+                <div ng-if="user" class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a  href="#/house" >Home</a></li>
+                        <li><a  href="">Belongings</a></li>
+                        <li><a  href="" >News</a></li>
+                        <li><a  href="" >Invite</a></li>
+                        <li><a  href="" >FAQ</a></li>
+                        <li><a  href="" ng-click="logOut()">Log out</a></li>
+                    </ul>
                 </div>
-            </footer>
 
-            <div ng-include=" '/partials/contactForm.html'"></div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <form class="navbar-form navbar-right" ng-submit="login(user.username, user.password)"  ng-if="!user">
+                        <div class="form-group">
+                            <input type="text" placeholder="Username" ng-model="user.username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" ng-model="user.password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-warning">Login</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js" type="text/javascript"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js" type="text/javascript"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
+        <div ng-view></div>
 
-            <script src="/app/app.js" type="text/javascript"></script>
+        <!--footer-->
+        <footer class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-success btn-feedback" ng-click="initContactForm()" >Send us your feedback!</button>
+                <p class="navbar-text">Housebook &COPY; 2016</p>
+            </div>
+        </footer>
 
-            <script src="/app/controllers/MainCtlr.js" type="text/javascript"></script>
-            <script src="/app/controllers/LoginCtlr.js" type="text/javascript"></script>
-            <script src="/app/controllers/HouseCtlr.js" type="text/javascript"></script>
-            <script src="app/controllers/HouseProfileCtlr.js" type="text/javascript"></script>
+        <div ng-include=" '/partials/contactForm.html'"></div>
 
-            <script src="app/services/AuthSvc.js" type="text/javascript"></script>
-            <script src="app/services/HouseProfileSvc.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
 
-            <script src="/app/directives/customOnChange.js" type="text/javascript"></script>
+        <script src="/app/app.js" type="text/javascript"></script>
 
-            <script src="/app/utils/downsampling.js" type="text/javascript"></script>
+        <script src="/app/controllers/MainCtlr.js" type="text/javascript"></script>
+        <script src="/app/controllers/LoginCtlr.js" type="text/javascript"></script>
+        <script src="/app/controllers/HouseCtlr.js" type="text/javascript"></script>
+        <script src="app/controllers/HouseProfileCtlr.js" type="text/javascript"></script>
 
-    </body>
+        <script src="app/services/AuthSvc.js" type="text/javascript"></script>
+        <script src="app/services/HouseProfileSvc.js" type="text/javascript"></script>
+
+        <script src="/app/directives/customOnChange.js" type="text/javascript"></script>
+
+        <script src="/app/utils/downsampling.js" type="text/javascript"></script>
+
+</body>
 </html>
