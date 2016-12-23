@@ -5,10 +5,11 @@ var filessystem = require('fs');
 var ObjectId = require('mongodb').ObjectID;
 var config = require('../../config');
 
-
 var House = require('../../model/house');
 var Address = require('../../model/address');
 var User = require('../../model/user');
+var Image = require('../../model/image');
+
 
 router.get('/:profileId', function (req, res, next) {
     if (!req.headers['x-auth']) {
@@ -38,9 +39,26 @@ router.post('/:profileId', function (req, res, next) {
     House.findOne({"_id": ObjectId(req.params.profileId)}).exec(function (err, house) {
         if (err)
             return next(err);
+        console.log("isProfilePicture " + req.body.isProfilePicture);
 
-        if (req.body.thumbnail && req.body.thumbnail.length) {
-            saveThumbnail(req.params.profileId, req.body.thumbnail);
+        //FIXME: handle this picture upload not only for profile pictures
+        if (req.body.isProfilePicture) {
+            console.log("create img object");
+
+            var picture = new Image({
+                path: req.params.profileId + '/' + req.body.fileName,
+                isProfilePicture: req.body.isProfilePicture,
+                uploaded: new Date(),
+                uploadedBy: req.body.userId
+            });
+            console.log("Prepare img to save with house");
+            house.profilePicture = picture;
+            house.save(function (err) {
+                if (err)
+                    return next(err);
+                console.log("Image saved");
+            });
+
         }
 
         return res.sendStatus(201);
@@ -92,20 +110,5 @@ router.post('/', function (req, res, next) {
         });
     });
 });
-
-
-
-function saveThumbnail(profileId, data) {
-    var base64Data = data.replace(/^data:image\/png;base64,/, "");
-    var dir = __dirname + '/../../uploads/' + profileId;
-    console.log(dir);
-    if (!filessystem.existsSync(dir)) {
-        filessystem.mkdirSync(dir);
-    }
-
-    filessystem.writeFile(dir + '/thumbnail.png', base64Data, 'base64', function (err) {
-        console.log(err);
-    });
-}
 
 module.exports = router;

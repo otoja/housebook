@@ -1,5 +1,6 @@
 var db = require('../db');
 var addressModel = require('../model/address');
+var imageModel = require('../model/image');
 
 var house = db.Schema({
     name: {type: String, select: true, required: true},
@@ -8,7 +9,7 @@ var house = db.Schema({
     inhabitants: [{type: db.Schema.Types.ObjectId, ref: 'User', required: false}],
     manuals: [{type: String, required: false}],
     pictures: [{type: db.Schema.Types.ObjectId, ref: 'Image', required: false}],
-    profilePicture: {type: db.Schema.Types.ObjectId, ref: 'Image', required: false},
+    profilePicture: {type: imageModel.schema, required: false, select:true},
     backgroundPicture: {type: db.Schema.Types.ObjectId, ref: 'Image', required: false},
     address: {type: addressModel.schema},
     builtYear: {type: Number, required: false}
