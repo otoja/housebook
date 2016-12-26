@@ -5,9 +5,11 @@ housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $ro
 
     HouseProfileSvc.getProfile($routeParams.id).then(function (response) {
         $scope.profile = response;
-        $scope.profile.mapq = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBK5uabiBpR15vbeg-DYFZq9GuQsQNImWY&q=" + encodeURIComponent($scope.profile.address.street1) + " " + encodeURIComponent($scope.profile.address.street2) + "," + encodeURIComponent($scope.profile.address.city)+ "," + encodeURIComponent($scope.profile.address.country);
+        $scope.profile.mapq = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBK5uabiBpR15vbeg-DYFZq9GuQsQNImWY&q=" + encodeURIComponent($scope.profile.address.street1) + " " + encodeURIComponent($scope.profile.address.street2) + "," + encodeURIComponent($scope.profile.address.city) + "," + encodeURIComponent($scope.profile.address.country);
         $scope.currentProjectUrl = $sce.trustAsResourceUrl($scope.profile.mapq);
-        
+        $scope.profile.img = 'https://s3.amazonaws.com/housebook-uploads/20161206_163310.jpg';
+        loadThumbnail();
+
     }, function (err) {
         console.log(err);
     });
@@ -56,12 +58,13 @@ housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $ro
         }
     }
 
-    $scope.saveProfilePicture = function () {
-        HouseProfileSvc.saveProfilePicture($routeParams.id, $scope.profileThumbnail, document.getElementById('file').files[0]).then(function(){
-            var img =  document.getElementById('house-profile-picture');
+    $scope.savePicture = function () {
+        var file = document.getElementById('file').files[0];
+        HouseProfileSvc.savePicture($routeParams.id, file.name, file.type, file, true, $rootScope.user._id).then(function () {
+            var img = document.getElementById('house-profile-picture');
             img.src = $scope.profileThumbnail;
         });
-        
+
         $('#basicPropertiesModal').modal('hide');
     };
 
@@ -69,5 +72,28 @@ housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $ro
         $("input#file").change(function () { //set up a common class
             readURL(this);
         });
+
+
     });
+
+    function loadThumbnail() {
+        var canvas = document.getElementById("house-profile-canvas");
+        var ctx = canvas.getContext("2d");
+
+        var img = new Image();
+        img.crossOrigin = "Anonymous"; //cors support
+        img.onload = function () {
+            var W = img.width;
+            var H = img.height;
+            canvas.width = W;
+            canvas.height = H;
+            ctx.drawImage(img, 0, 0); //draw image
+            var time1 = Date.now();
+
+            //resize
+            resample_single(canvas, 400, 300, true);
+
+        };
+        img.src = $scope.profile.profilePicture ? 'https://s3.amazonaws.com/housebook-uploads/' + $scope.profile.profilePicture.path : '/img/test.jpg';
+    }
 });
