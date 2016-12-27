@@ -13,16 +13,12 @@ housebook.service('HouseProfileSvc', function ($q, $http) {
     obj.savePicture = function (profileId, name, type, file, isProfilePicture, createdBy) {
         var defer = $q.defer();
 
-        var data = {profileId: profileId, fileName: name, fileType: type};
+        var data = {profileId: profileId, fileName: name, fileType: file.type};
         $http({
             method: 'GET',
             url: '/aws/sign-s3',
-            params: data,
-            headers: {'x-auth': localStorage.getItem('token')}
+            params: data
         }).then(function (response) {
-            var fd = new FormData();
-            fd.append("file", file);
-
             $http({
                 method: 'PUT',
                 url: response.data.signedRequest,
@@ -32,7 +28,7 @@ housebook.service('HouseProfileSvc', function ($q, $http) {
 
                 var payload = {fileName: name, contentType: type, isProfilePicture: isProfilePicture, userId: createdBy};
 
-                $http.post('/house/' + profileId, JSON.stringify(payload), {headers: {'x-auth': localStorage.getItem('token')}});
+                $http.post('/house/' + profileId, JSON.stringify(payload));
                 defer.resolve(uploadResponse);
 
             }, function (err) {
@@ -47,7 +43,7 @@ housebook.service('HouseProfileSvc', function ($q, $http) {
     };
 
     obj.createProfile = function (profile) {
-        return $http.post('/house/', JSON.stringify(profile), {headers: {'x-auth': localStorage.getItem('token')}});
+        return $http.post('/house/', JSON.stringify(profile));
     };
 
 
