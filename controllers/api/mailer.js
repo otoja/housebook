@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var config = require("../../config");
 var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
 /**
  * This API is set up for sending mails from our app
  * It requires params like:
