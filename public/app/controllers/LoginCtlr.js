@@ -7,7 +7,6 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, AuthS
                 AuthSvc.getUser().then(function (response) {
                     $rootScope.user = response.data;
                     $location.path('house');
-                    $rootScope.$apply();
                 });
             });
         });
@@ -24,10 +23,10 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, AuthS
         _.defer(function () {
             $rootScope.user = null;
             AuthSvc.signOut();
-            $rootScope.$apply();
+            $scope.$apply();
         });
     };
-    
+
 
 
 });
