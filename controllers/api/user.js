@@ -7,7 +7,7 @@ var config = require('../../config');
 
 router.get('/', function (req, res, next) {
 
-    if (!req.headers['x-auth']) {
+    if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
         console.log("Missing token");
         return res.sendStatus(401);
     }
@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
     console.log("jwt decode");
 
     User.findOne({username: auth.username})
-            .populate({path: 'createdHouseProfile'})
+            .populate({path: 'createdHouseProfile.ref'})
             
             .exec(function (err, user) {
                 if (err)

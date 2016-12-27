@@ -12,7 +12,7 @@ var Image = require('../../model/image');
 
 
 router.get('/:profileId', function (req, res, next) {
-    if (!req.headers['x-auth']) {
+    if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
         console.log("Missing token");
         return res.sendStatus(401);
     }
@@ -30,7 +30,7 @@ router.get('/:profileId', function (req, res, next) {
 });
 
 router.post('/:profileId', function (req, res, next) {
-    if (!req.headers['x-auth']) {
+    if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
         console.log("Missing token");
         return res.sendStatus(401);
     }
@@ -41,18 +41,21 @@ router.post('/:profileId', function (req, res, next) {
             return next(err);
         console.log("isProfilePicture " + req.body.isProfilePicture);
 
-        //FIXME: handle this picture upload not only for profile pictures
-        if (req.body.isProfilePicture) {
+        if (req.body.contentType) {
             console.log("create img object");
 
             var picture = new Image({
                 path: req.params.profileId + '/' + req.body.fileName,
-                isProfilePicture: req.body.isProfilePicture,
                 uploaded: new Date(),
                 uploadedBy: req.body.userId
             });
             console.log("Prepare img to save with house");
-            house.profilePicture = picture;
+
+            if (req.body.isProfilePicture) {
+                picture.isProfilePicture = true;
+                house.profilePicture = picture;
+            }
+
             house.save(function (err) {
                 if (err)
                     return next(err);
@@ -66,7 +69,7 @@ router.post('/:profileId', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    if (!req.headers['x-auth']) {
+    if (!req.headers['x-auth']  || !req.headers['x-auth'].length) {
         console.log("Missing token");
         return res.sendStatus(401);
     }
