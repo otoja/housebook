@@ -1,12 +1,12 @@
-<div class="container-fluid house-profile" ng-controller="HouseProfileCtlr">
+<div class=" house-profile" ng-controller="HouseProfileCtlr">
     <div class="col-md-3 left-side">
         <div class="house-profile-picture">
-            <a class="glyphicon glyphicon-edit pull-right" data-target="#basicPropertiesModal" data-toggle="modal" title="Change profile picture"></a>
-            <!--<img class="center-block" id="house-profile-picture" ng-src="{{profile.thumbnail}}" alt="House profile thumbnail"/>-->
-            <canvas class="center-block" id="house-profile-canvas" style="max-height: 300px;max-width: 300px;padding:20px;"></canvas>
+            
+            <canvas class="center-block" id="house-profile-canvas" style=""></canvas>
+            <a class="glyphicon glyphicon-edit edit-profile-picture" data-target="#basicPropertiesModal" data-toggle="modal" title="Change profile picture"></a>
         </div>
         <ul class="nav nav-tabs nav-stacked">
-            <li><a href="">House profile</a></li>
+            <li ><a href="" class="active">House profile</a></li>
             <li><a href="">Pictures</a></li>
             <li><a href="">Documents</a></li>
             <li><a href="">Lists</a></li>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class='clearfix'>
+            <div class='clearfix google-maps'>
                 <p class="heading">Map</p>
                 <iframe
                     width="400"
@@ -108,13 +108,13 @@
                             <label  for="file">Choose house profile picture</label>
                             <input type="file" id="file" class="form-control" ng-model="defaultHouseSpace.img" accept="image/*">
                         </div>
-                        <img src="../images/house-default.jpg" id="test-profile-picture" alt="Upload profile picture" class="center-block"/>
+                        <canvas id="canvas" width="200" height="200" class="center-block"></canvas>  
                         <input type="hidden" name="userId" ng-model="user._id">
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="saveProfilePicture()" >Save changes</button>
+                    <button type="button" class="btn btn-primary" ng-click="savePicture()" >Save changes</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

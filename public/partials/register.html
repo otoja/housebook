@@ -1,10 +1,10 @@
 <div class=" ">
     <!--<div id="logo"></div>-->
     <div class="col-xs-12">
-        <form name="createAccountForm" ng-init="user={}" class="form-login" ng-submit="signUp(user)" novalidate>
+        <form name="createAccountForm" ng-init="user = {}" class="form-login" ng-submit="signUp(user)" novalidate>
             <h2 class="form-signin-heading text-center">Create account</h2>
             <label for="signupUserName" class="sr-only">User name</label>
-            <input type="text" id="signupUserName" class="form-control" name="username" placeholder="User name" ng-model="user.username" required="" >
+            <input type="text" id="signupUserName" class="form-control" name="username" placeholder="User name" ng-model="user.username" required="" autocorrect="off" autocapitalize="none">
             <br>
             <label for="signupFirstName" class="sr-only">First name</label>
             <input type="text" id="signupFirstName" name="signupFirstName" class="form-control" placeholder="First name" ng-model="user.firstName" required="" >

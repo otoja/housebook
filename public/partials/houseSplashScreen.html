@@ -1,10 +1,10 @@
 <div class="houses-grid">
     <div ng-repeat="house in houses" class="">
         <div class="house-space-on-grid" ng-click="openProfile()">
-            <div class="lead text-uppercase text-center" ><a ng-href="#/house/{{house.ref}}">{{house.name}}</a>
+            <div class="lead text-uppercase text-center" ><a ng-href="#/house/{{house.ref._id}}">{{house.name}}</a>
             </div>
             <img ng-if="!house.thumbnail" src="../images/house-default.jpg" alt="Default house picture" class="center-block">
-            <img ng-show="house.thumbnail" id="userImg" ng-src="/img/{{house.ref}}/thumbnail.png" class="center-block">
+            <img ng-show="house.thumbnail" id="userImg" ng-src="{{house.thumbnail}}" class="center-block">
             <p class="text-muted lead text-center">{{house.description}}</p>
         </div>
     </div>

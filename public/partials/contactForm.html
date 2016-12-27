@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form name="contactForm" ng-hide="formSent" class="form-landing" ng-submit="sentMail(email, message)">
                     <div class="form-group">
-                        <input type="text" class="form-control" ng-model="email" id="email" placeholder="Email" autofocus=""/>
+                        <input type="text" class="form-control" ng-model="email" id="email" placeholder="Email" autofocus="" autocorrect="off" autocapitalize="none"/>
                     </div>
                     <div class="form-group clearfix">
                         <textarea id="message" rows="5" class="col-xs-12" ng-model="message" placeholder="Your message" reqired></textarea>
