@@ -19,6 +19,10 @@
   color: #b11a21;
   font: 400 1.5em/1.2em 'Open Sans', sans-serif;
 }
+.house-profile .nav .active {
+  text-decoration: none;
+  background-color: #eee;
+}
 .house-profile .house-profile-preferences {
   background-color: white;
   padding: 20px;
@@ -27,10 +31,15 @@
   color: grey;
 }
 .house-profile .house-profile-picture {
-  background-color: white;
+  /*background-color: white;*/
   margin-bottom: 15px;
 }
-.house-profile .house-profile-picture a {
+.house-profile .house-profile-picture .edit-profile-picture {
+  position: absolute;
+  top: 30;
+  right: 30;
+}
+.house-profile .house-profile-picture .edit-profile-picture a {
   padding: 10px 10px 0 0;
   color: #7acfd6;
   text-decoration: none;
@@ -40,5 +49,24 @@
   max-width: 350px;
   padding: 20px;
   overflow: hidden;
+}
+.house-profile .house-profile-picture #house-profile-canvas {
+  width: 100%;
+  max-height: 300px;
+  max-width: 300px;
+  padding: 20px;
+}
+.house-profile .google-maps {
+  position: relative;
+  padding-bottom: 35%;
+  height: 0;
+  overflow: hidden;
+}
+.house-profile .google-maps iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 /*# sourceMappingURL=houseProfile.css.map */
