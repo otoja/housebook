@@ -10,6 +10,7 @@
     "npm": "4.0.3"
   },
   "dependencies": {
+    "amqplib": "^0.5.1",
     "aws-sdk": "^2.7.16",
     "bcrypt": "^0.8.7",
     "body-parser": "~1.15.2",
