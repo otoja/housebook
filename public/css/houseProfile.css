@@ -10,25 +10,39 @@
   font: 400 3.5em/1.1em "Scada", sans-serif;
   color: #e0474c;
 }
-.house-profile .nav {
+.house-profile .left-side .nav {
   background-color: white;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
 }
-.house-profile .nav a {
+.house-profile .left-side .nav a {
   color: #b11a21;
-  font: 400 1.5em/1.2em 'Open Sans', sans-serif;
+  font: 400 1.1em/0.8em 'Open Sans', sans-serif;
 }
-.house-profile .nav .active {
+.house-profile .left-side .nav .active {
   text-decoration: none;
   background-color: #eee;
 }
-.house-profile .house-profile-preferences {
-  background-color: white;
-  padding: 20px;
-}
 .house-profile .house-profile-preferences p {
   color: grey;
+}
+.house-profile .house-profile-preferences .tab-content {
+  background-color: white;
+  padding: 10px;
+}
+.house-profile .house-profile-preferences .google-maps {
+  position: relative;
+  padding-bottom: 35%;
+  height: 0;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.house-profile .house-profile-preferences .google-maps iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
 }
 .house-profile .house-profile-picture {
   /*background-color: white;*/
@@ -36,37 +50,17 @@
 }
 .house-profile .house-profile-picture .edit-profile-picture {
   position: absolute;
-  top: 30;
-  right: 30;
+  top: 10;
+  right: 20;
 }
 .house-profile .house-profile-picture .edit-profile-picture a {
   padding: 10px 10px 0 0;
   color: #7acfd6;
   text-decoration: none;
 }
-.house-profile .house-profile-picture img {
-  height: 300px;
-  max-width: 350px;
-  padding: 20px;
-  overflow: hidden;
-}
 .house-profile .house-profile-picture #house-profile-canvas {
   width: 100%;
   max-height: 300px;
   max-width: 300px;
-  padding: 20px;
-}
-.house-profile .google-maps {
-  position: relative;
-  padding-bottom: 35%;
-  height: 0;
-  overflow: hidden;
-}
-.house-profile .google-maps iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  height: 100% !important;
 }
 /*# sourceMappingURL=houseProfile.css.map */

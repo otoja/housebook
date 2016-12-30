@@ -1,8 +1,25 @@
-housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, AuthSvc) {
+housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $window, AuthSvc, $routeParams) {
+
+    $scope.isResetPassword = $routeParams.token != undefined;
+    $scope.resetPasswordTokenIsValid = true;
+    $scope.formSent = false;
+    $scope.success = false;
+
+    if ($scope.isResetPassword) {
+        $scope.validationError = null;
+        AuthSvc.validateResetPasswordHash($routeParams.token)
+                .success(function (username) {
+                    $scope.username = username;
+                })
+                .error(function (err) {
+                    $scope.resetPasswordTokenIsValid = false;
+                    $scope.validationError = err;
+                });
+    }
 
     $scope.login = function (username, password) {
         AuthSvc.login(username, password).then(function (response) {
-            localStorage.setItem('token', response.data);
+            $window.localStorage.setItem('token', response.data);
             _.defer(function () {
                 AuthSvc.getUser().then(function (response) {
                     $rootScope.user = response.data;
@@ -14,19 +31,39 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, AuthS
 
     $scope.signUp = function (user) {
         AuthSvc.signUp(user).then(function (response) {
-            $scope.user = user;
-            $location.path('/login');
+            AuthSvc.login(user.username, user.password).then(function (response) {
+                $window.localStorage.setItem('token', response.data);
+                _.defer(function () {
+                    AuthSvc.getUser().then(function (response) {
+                        $rootScope.user = response.data;
+                        $location.path('house');
+                    });
+                });
+            });
+        }, function (err) {
+            $scope.validationError = err.data;
         });
     };
 
     $scope.logOut = function () {
         _.defer(function () {
             $rootScope.user = null;
-            AuthSvc.signOut();
+            AuthSvc.logout();
             $scope.$apply();
         });
     };
 
-
+    $scope.changePassword = function (username, password) {
+        $scope.formSent = true;
+        AuthSvc.changePassword(username, password, $scope.isResetPassword)
+                .success(function (response) {
+                    $scope.success = true;
+                    localStorage.setItem('token', response);
+                })
+                .error(function (err) {
+                    $scope.success = false;
+                    $scope.errMsg = err;
+                });
+    };
 
 });

@@ -13,26 +13,43 @@
         color: @lighter-red;    
     }
 
-    .nav{
-        background-color: white;
-        padding: 20px;
-        box-sizing: border-box;
-        a {
-            color:@deep-red;
-            font: 400 1.5em/1.2em 'Open Sans', sans-serif;
-        }
-        .active {
-            text-decoration: none;
-            background-color: #eee;
+    .left-side{
+        .nav {
+            background-color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            a {
+                color:@deep-red;
+                font: 400 1.1em/0.8em 'Open Sans', sans-serif;
+            }
+            .active {
+                text-decoration: none;
+                background-color: #eee;
+            }
         }
     }
-
     .house-profile-preferences{
-        background-color: white;
-        padding:20px;
-
         p{
             color:grey;
+        }
+        .tab-content{
+            background-color: white;
+            padding:10px;
+        }
+        .google-maps {
+            position: relative;
+            padding-bottom: 35%; // This is the aspect ratio
+            height: 0;
+            overflow: hidden;
+            margin-top:20px;
+
+            iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100% !important;
+                height: 100% !important;
+            }
         }
 
     }
@@ -42,8 +59,8 @@
         margin-bottom: 15px;
         .edit-profile-picture{
             position: absolute;
-            top: 30;
-            right: 30;
+            top: 10;
+            right: 20;
             a{
                 padding:10px 10px 0 0;
                 color:@light-blue;
@@ -51,34 +68,13 @@
             }
         }
 
-        img{
-            height:300px;
-            max-width: 350px;
-            padding:20px;
-            overflow: hidden;
-        }
-
         #house-profile-canvas{
             width:100%;
             max-height: 300px;
             max-width: 300px;
-            padding:20px;
         }
     }
 
-    .google-maps {
-        position: relative;
-        padding-bottom: 35%; // This is the aspect ratio
-        height: 0;
-        overflow: hidden;
 
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100% !important;
-            height: 100% !important;
-        }
-    }
 
 }
