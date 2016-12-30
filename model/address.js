@@ -1,10 +1,10 @@
 var db = require('../db');
 
 var address = db.Schema({
-    street1: {type: String, required: true},
+    street1: {type: String, required: false},
     street2: {type: String, required: false},
-    postalCode: {type: Number, required: true},
-    city: {type: String, required: true},
+    postalCode: {type: Number, required: false},
+    city: {type: String, required: false},
     country: {type: String, required: false},
     state: {type: String, required: false}
 });
