@@ -5,18 +5,21 @@
 </span>
 <br>
 <section ng-if="!buildingSectionIsEditing">
-    <div class='col-md-2'>Type</div>
-    <div class='col-md-10'>House</div>
-    <div class='col-md-2'>Built year</div>
+    <div class='col-sm-4 col-md-2'>Type</div>
+    <div class='col-md-10'>{{profile.type}}</div>
+    <div class='col-sm-4 col-md-2'>Built year</div>
     <div class='col-md-10' ng-if="!profile.builtYear"><i class="text-muted">Not specified.</i></div>
     <div class='col-md-10' ng-if="profile.builtYear">{{profile.builtYear}}</div>
-    <div class='col-md-2'>Storages</div>
-    <div class='col-md-10'>2</div>
-    <div class='col-md-2'>Square meters</div>
-    <div class='col-md-10'>52</div>
-    <div class='col-md-2'>Rooms</div>
-    <div class='col-md-10'>3</div>
-    <div class='col-md-2'>Facilities</div>
+    <div class='col-sm-4  col-md-2'>Storages</div>
+    <div class='col-md-10' ng-if="!profile.storages"><i class="text-muted">Not specified.</i></div>
+    <div class='col-md-10' ng-if="profile.storages">{{profile.storages}}</div>
+    <div class='col-sm-4 col-md-2'>Square meters</div>
+    <div class='col-md-10' ng-if="!profile.meters"><i class="text-muted">Not specified.</i></div>
+    <div class='col-md-10' ng-if="profile.meters">{{profile.meters}}</div>
+    <div class='col-sm-4 col-md-2'>Rooms</div>
+    <div class='col-md-10' ng-if="!profile.rooms"><i class="text-muted">Not specified.</i></div>
+    <div class='col-md-10' ng-if="profile.rooms">{{profile.rooms}}</div>
+    <div class='col-sm-4 col-md-2'>Facilities</div>
     <div class='col-md-10'>
         <div ng-if="profile.facilities.length" ng-repeat="f in profile.facilities"><span><i class="fa fa-check-square-o" aria-hidden="true"></i> {{f.label}}</span></div>
         <i ng-if="!profile.facilities.length" class="text-muted">Not specified.</i>
@@ -24,8 +27,8 @@
 </section>
 <section ng-if="buildingSectionIsEditing">
     <div class="">
-        <div class='col-md-2'>Type</div>
-        <div class="col-md-10">
+        <div class='col-sm-4 col-md-2'>Type</div>
+        <div class="col-sm-8 col-md-10">
             <label class="radio-inline">
                 <input type="radio" name="inlineRadioOptions" ng-model="mutableProfile.type" id="inlineRadio1" value="Family house"> Family house
             </label>

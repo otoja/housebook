@@ -110,8 +110,8 @@ nav{
     display:block;
 
     .house-space-on-grid{
-        width:300px;
-        height:300px;
+        width:280px;
+        height:250px;
         -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
         -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
@@ -170,4 +170,29 @@ nav{
 .bg-panel{
     padding:15px;
     text-align: center;
+}
+
+.img-description {
+    position: absolute;
+    top: 0;
+    left: 11;
+    bottom:290;
+    right:11;    
+    color: #fff;
+
+    text-align: center;
+    vertical-align: center;
+    visibility: hidden;
+    
+    cursor: pointer;
+
+    /*remove comment if you want a gradual transition between states
+    -webkit-transition: visibility opacity 0.2s;
+    */
+}
+
+
+.img-wrap:hover .img-description {
+    visibility: visible;
+    opacity: 1;
 }
