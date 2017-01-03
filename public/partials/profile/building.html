@@ -7,6 +7,7 @@
 <section ng-if="!buildingSectionIsEditing">
     <div class='col-sm-4 col-md-2'>Type</div>
     <div class='col-md-10'>{{profile.type}}</div>
+    <div class='col-md-10' ng-if="!profile.type"><i class="text-muted">Not specified.</i></div>
     <div class='col-sm-4 col-md-2'>Built year</div>
     <div class='col-md-10' ng-if="!profile.builtYear"><i class="text-muted">Not specified.</i></div>
     <div class='col-md-10' ng-if="profile.builtYear">{{profile.builtYear}}</div>
