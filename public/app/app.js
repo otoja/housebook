@@ -1,4 +1,4 @@
-var housebook = angular.module('housebook', ['ngRoute', 'angular-loading-bar', 'ui.bootstrap']);
+var housebook = angular.module('housebook', ['ngRoute', 'angular-loading-bar', 'ui.bootstrap','angulartics.google.analytics']);
 
 housebook.config(function ($routeProvider, $locationProvider, cfpLoadingBarProvider, $httpProvider) {
 

@@ -1,6 +1,6 @@
 <section>
     <span class='pull-right' >
-        <a ng-if='basicInfoIsEditing === false' ng-click='editSection("basicInfo")'><i class='glyphicon glyphicon-edit'></i>&nbsp;Edit section</a>
+        <a ng-if='basicInfoIsEditing === false' ng-click='editSection("basicInfo")'   analytics-on="click" analytics-event="Edit basic info" analytics-category="Actions"><i class='glyphicon glyphicon-edit'></i>&nbsp;Edit section</a>
         <a ng-if='basicInfoIsEditing === true' ng-click='updateSection()'>&nbsp;Save</a>
         <a ng-if='basicInfoIsEditing === true' ng-click="cancelEditingSection()">&nbsp;Cancel</a>
     </span><br>
