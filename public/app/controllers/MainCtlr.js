@@ -45,9 +45,4 @@ housebook.controller('MainCtlr', function ($scope, $location, AuthSvc) {
                 });
     };
 
-
-    $scope.$on('$viewContentLoaded', function (event) {
-        
-    });
-
 });
