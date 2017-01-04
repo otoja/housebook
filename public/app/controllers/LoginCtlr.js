@@ -1,13 +1,13 @@
-housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $window, AuthSvc, $stateParams) {
+housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $window, AuthSvc, $routeParams) {
 
-    $scope.isResetPassword = $stateParams.token != undefined;
+    $scope.isResetPassword = $routeParams.token != undefined;
     $scope.resetPasswordTokenIsValid = true;
     $scope.formSent = false;
     $scope.success = false;
 
     if ($scope.isResetPassword) {
         $scope.validationError = null;
-        AuthSvc.validateResetPasswordHash($stateParams.token)
+        AuthSvc.validateResetPasswordHash($routeParams.token)
                 .success(function (username) {
                     $scope.username = username;
                 })
