@@ -1,4 +1,4 @@
-housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $routeParams, HouseProfileSvc, ImageFctr, $location, $anchorScroll) {
+housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $routeParams, HouseProfileSvc, ImageFctr, $location) {
 
     var profilePictureCanvas = null, ctx = null, img = null;
 
@@ -65,7 +65,7 @@ housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $ro
         } else {
             pic = $scope.profile.profilePicture.path;
         }
-        img.src = $scope.profile.profilePicture ? 'https://s3.amazonaws.com/house-uploads-local/' + $scope.profileId + '/400x300/' + pic : '/img/default.png';
+        img.src = $scope.profile.profilePicture ? 'https://s3.amazonaws.com/housebook-uploads-staging/' + $scope.profileId + '/400x300/' + pic : '/img/default.png';
     }
 
 
