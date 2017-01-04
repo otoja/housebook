@@ -22,4 +22,9 @@ housebook.controller('HouseCtlr', function ($scope, $rootScope, $location, House
             return false;
         });
     };
+    
+    $scope.openProfile=function(id){
+        return $location.path('/house/'+id);
+    };
+    
 });
