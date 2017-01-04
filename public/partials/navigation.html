@@ -1,8 +1,8 @@
 <div class="navbar-right">
-    <a href="#/house/create" class="btn btn-info navbar-btn pull-left"><i aria-hidden="true" class="glyphicon glyphicon-plus"></i>&nbsp;Add new profile</a>
-    <ul ng-if="user" class="nav navbar-nav">
-        <li><a  href="#/house" >Home</a></li>
-        <li><a  href="">Belongings</a></li>
+    <a ng-if="user" href="#/house/create" class="btn btn-info navbar-btn pull-left"><i aria-hidden="true" class="glyphicon glyphicon-plus"></i>&nbsp;Add new profile</a>
+    <ul class="nav navbar-nav">
+        <li  ng-if="user"><a  href="#/house" >Home</a></li>
+        <li ng-if="user"><a  href="">Belongings</a></li>
         <li><a  href="" >News</a></li>
         <li><a  href="" >Invite</a></li>
         <li><a  href="" >FAQ</a></li>
