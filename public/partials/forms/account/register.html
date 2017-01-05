@@ -36,6 +36,6 @@
                 <input type="checkbox" value="terms"> Accept terms and conditions
             </label>
         </div>
-        <button class="btn btn-lg btn-block" ng-disabled="createAccountForm.$invalid || user.password !== user.repeatPassword" type="submit" analytics-on="click" analytics-event="Register account" analytics-category="Actions">Signup</button>
+        <button class="btn btn-lg btn-block" ng-disabled="createAccountForm.$invalid || user.password !== user.loginRepeatPassword" type="submit" analytics-on="click" analytics-event="Register account" analytics-category="Actions">Signup</button>
     </form>
 </div>
