@@ -1,5 +1,12 @@
 housebook.controller('HouseCtlr', function ($scope, $rootScope, $location, HouseProfileSvc) {
     $scope.houses = $rootScope.user ? $rootScope.user.createdHouseProfile : [];
+    angular.forEach($scope.houses, function(houseProfile){
+        if (houseProfile.ref && houseProfile.ref.profilePicture){
+            houseProfile.thumbnail = "https://s3.amazonaws.com/housebook-uploads-staging/"+houseProfile.ref.profilePicture.path;
+        }else {
+            houseProfile.thumbnail = "/img/defaultSmall.png";
+        }
+    });
 
     $scope.defaultHouseSpace = {_id: -1, name: "default house space", description: "Demo house profile"};
 
@@ -15,4 +22,9 @@ housebook.controller('HouseCtlr', function ($scope, $rootScope, $location, House
             return false;
         });
     };
+    
+    $scope.openProfile=function(id){
+        return $location.path('/house/'+id);
+    };
+    
 });

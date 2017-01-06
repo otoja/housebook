@@ -8,13 +8,13 @@
             <div class="modal-body">
                 <form name="contactForm" ng-hide="formSent" class="form-landing" ng-submit="sentMail(email, message)">
                     <div class="form-group">
-                        <input type="text" class="form-control" ng-model="email" id="email" placeholder="Email" autofocus=""/>
+                        <input type="text" class="form-control" ng-model="email" id="email" placeholder="Email" autofocus="" autocorrect="off" autocapitalize="none"/>
                     </div>
                     <div class="form-group clearfix">
                         <textarea id="message" rows="5" class="col-xs-12" ng-model="message" placeholder="Your message" reqired></textarea>
                     </div>
 
-                    <button type="submit" ng-disabled="contactForm.$invalid" class="btn btn-success btn-lg btn-block">Contact us!</button>
+                    <button type="submit" ng-disabled="contactForm.$invalid" class="btn btn-success btn-lg btn-block" analytics-on="click" analytics-event="Contact form send" analytics-category="Actions">Contact us!</button>
                 </form>
 
                 <div ng-show="formSent" id="confirmation-message" class="confirmation-message">
@@ -30,6 +30,6 @@
             <div  ng-show="formSent" class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>

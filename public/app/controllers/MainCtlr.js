@@ -1,5 +1,6 @@
-housebook.controller('MainCtlr', function ($scope, $rootScope) {
+housebook.controller('MainCtlr', function ($scope, $location, AuthSvc) {
     $scope.formSent = false;
+    $scope.success = true;
 
     $scope.initContactForm = function () {
         _.defer(function () {
@@ -24,4 +25,24 @@ housebook.controller('MainCtlr', function ($scope, $rootScope) {
         });
         $scope.formSent = true;
     };
+
+    $scope.goToResetPasswordForm = function () {
+        $("#login-dp-toggle").dropdown("toggle");
+        $location.path('/user/reset-password');
+    };
+
+    $scope.resetPassword = function (email) {
+        $scope.success = true;
+        $scope.formSent = true;
+
+        AuthSvc.resetPassword(email)
+                .success(function (response) {
+                    console.log(response.data);
+                })
+                .error(function (err) {
+                    $scope.resetPasswordErrorMsg = err;
+                    $scope.success = false;
+                });
+    };
+
 });
