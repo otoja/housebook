@@ -1,4 +1,4 @@
-var housebook = angular.module('housebook', ['ngRoute', 'angular-loading-bar', 'ui.bootstrap','angulartics.google.analytics']);
+var housebook = angular.module('housebook', ['ngRoute', 'angular-loading-bar', 'ui.bootstrap', 'angulartics.google.analytics']);
 
 housebook.config(function ($routeProvider, $locationProvider, cfpLoadingBarProvider, $httpProvider) {
 
@@ -16,6 +16,9 @@ housebook.config(function ($routeProvider, $locationProvider, cfpLoadingBarProvi
                 controller: 'LoginCtlr',
                 templateUrl: 'partials/start.html',
                 resolve: {
+                    persistance:  function($location){
+                        checkPersistanceStorage($location);
+                    },                      
                     auth: function (AuthSvc, $rootScope, $location) {
                         revalidateSession(AuthSvc, $rootScope, $location, true);
                     }
@@ -36,9 +39,14 @@ housebook.config(function ($routeProvider, $locationProvider, cfpLoadingBarProvi
                         revalidateSession(AuthSvc, $rootScope, $location, false);
                     }
                 }})
-            .when('/user/change-password/:token?', {controller: 'LoginCtlr',templateUrl: 'partials/forms/account/changePassword.html'})
+            .when('/user/change-password/:token?', {controller: 'LoginCtlr', templateUrl: 'partials/forms/account/changePassword.html'})
             .when('/user/reset-password', {controller: 'HouseCtlr', templateUrl: 'partials/forms/account/resetPassword.html'})
+            .when('/error/persistance', {templateUrl: 'partials/error/persistance.error.html'})
             .otherwise({redirectTo: '/welcome'});
+});
+
+housebook.run(function ($location) {
+    checkPersistanceStorage($location);    
 });
 
 function revalidateSession(AuthSvc, $rootScope, $location, isWelcomePage) {
@@ -54,5 +62,16 @@ function revalidateSession(AuthSvc, $rootScope, $location, isWelcomePage) {
             }
 
         });
+    }
+}
+
+function checkPersistanceStorage($location){
+    try {
+        localStorage.ex = 1;
+        sessionStorage.ex2 = 1;
+        localStorage.removeItem("ex");
+        sessionStorage.removeItem("ex2");
+    } catch (ex) {
+        $location.path("/error/persistance");
     }
 }
