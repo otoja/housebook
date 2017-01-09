@@ -18,28 +18,40 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $wind
     }
 
     $scope.login = function (username, password) {
-        AuthSvc.login(username, password).then(function (response) {
-            $window.localStorage.setItem('token', response.data);
-            _.defer(function () {
-                AuthSvc.getUser().then(function (response) {
-                    $rootScope.user = response.data;
-                    $location.path('house');
+        AuthSvc.login(username, password)
+                .then(function (response) {
+                    $window.localStorage.setItem('token', response.data);
+                    _.defer(function () {
+                        AuthSvc.getUser()
+                                .success(function (response) {
+                                    $rootScope.user = response.data;
+                                    $location.path('house');
+                                })
+                                .error(function (err) {
+                                    $scope.validationError = err;
+                                });
+                    });
+                })
+                .catch(function (err) {
+                    $scope.validationError = {msg:err.msg?err.msg:err.data};
                 });
-            });
-        });
     };
 
     $scope.signUp = function (user) {
         AuthSvc.signUp(user).then(function (response) {
-            AuthSvc.login(user.username, user.password).then(function (response) {
-                $window.localStorage.setItem('token', response.data);
-                _.defer(function () {
-                    AuthSvc.getUser().then(function (response) {
-                        $rootScope.user = response.data;
-                        $location.path('house');
+            AuthSvc.login(user.username, user.password)
+                    .success(function (response) {
+                        $window.localStorage.setItem('token', response.data);
+                        _.defer(function () {
+                            AuthSvc.getUser().then(function (response) {
+                                $rootScope.user = response.data;
+                                $location.path('house');
+                            });
+                        });
+                    })
+                    .error(function (err) {
+                        $scope.validationError = err;
                     });
-                });
-            });
         }, function (err) {
             $scope.validationError = err.data;
         });
