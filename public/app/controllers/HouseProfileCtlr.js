@@ -68,8 +68,6 @@ housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $ro
         img.src = $scope.profile.profilePicture ? 'https://s3.amazonaws.com/housebook-uploads-staging/' + $scope.profileId + '/400x300/' + pic : '/img/default.png';
     }
 
-
-
     //load on start
     $(function () {
         $("input#file").change(function () { //set up a common class

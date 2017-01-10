@@ -11,7 +11,7 @@ var house = db.Schema({
     pictures: [{type: db.Schema.Types.ObjectId, ref: 'Image', required: false}],
     profilePicture: {type: imageModel.schema, required: false, select: true},
     backgroundPicture: {type: imageModel.schema, required: false, select: true},
-    address: {type: addressModel.schema},
+    address: {type: addressModel.schema, required: false},
     builtYear: {type: Number, required: false},
     movedInYear: {type: Number, required: false},
     ownership: {type: String, select: true, required: false},

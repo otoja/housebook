@@ -71,40 +71,27 @@ router.post('/:profileId', function (req, res, next) {
 /*Create house profile*/
 router.post('/', function (req, res, next) {
     if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
-        console.log("Missing token");
         return res.sendStatus(401);
     }
 
     var auth = jwt.decode(req.headers['x-auth'], config.secret);
-    var address = null;
-
-    console.log("Check request body");
-
-    if (req.body.street1 || req.body.street2 || req.body.postalCode || req.body.city || req.body.state || req.body.country) {
-        address = new Address({
-            street1: req.body.street1,
-            street2: req.body.street2,
-            postalCode: req.body.postalCode,
-            city: req.body.city,
-            state: req.body.state,
-            country: req.body.country
-        });
-    }
-
-    console.log(JSON.stringify(address));
+    
+    var address = new Address({
+        street1: req.body.address.street1,
+        street2: req.body.address.street2,
+        postalCode: req.body.address.postalCode,
+        city: req.body.address.city,
+        state: req.body.address.state,
+        country: req.body.address.country
+    });
 
     var house = new House({
         name: req.body.name,
         createdBy: req.body.createdBy,
         movedInYear: req.body.movedInYear,
-        ownership: req.body.ownership
+        ownership: req.body.ownership,
+        address: address
     });
-
-    if (address) {
-        house.address = address;
-    } else {
-        house.address = new Address();
-    }
 
     console.log(JSON.stringify(house));
     User.findOne({username: auth.username}).exec(function (err, user) {
@@ -177,7 +164,7 @@ router.put('/:profileId', function (req, res, next) {
                 house.address.country = req.body.address.country;
             }
         }
-        if (!helper.objectsAreTheSame(req.body.facilitiesArr, house.facilities)){
+        if (!helper.objectsAreTheSame(req.body.facilitiesArr, house.facilities)) {
             house.facilities = req.body.facilitiesArr;
         }
 
