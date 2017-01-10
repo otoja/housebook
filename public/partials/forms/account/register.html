@@ -26,16 +26,16 @@
             <span ng-if="createAccountForm.password.$invalid && createAccountForm.password.$touched" class="text-danger small">Password is required.</span>
         </div>
         <div class="form-group">
-            <label for="loginRepeatPassword" class="sr-only">Repeat password</label>
-            <input type="password" name="loginRepeatPassword" class="form-control" id="loginRepeatPassword" placeholder="Repeat password">
-            <span ng-if="createAccountForm.loginRepeatPassword.$invalid && createAccountForm.loginRepeatPassword.$touched" class="text-danger small">Repeat password.</span>
-            <span ng-if="user.password !== user.repeatPassword && createAccountForm.loginRepeatPassword.$touched" class="text-danger small">Password desn't match.</span>
+            <label for="repeatPassword" class="sr-only">Repeat password</label>
+            <input type="password" name="repeatPassword" class="form-control" id="repeatPassword" placeholder="Repeat password" ng-model="user.repeatPassword" required="">
+            <span ng-if="createAccountForm.repeatPassword.$invalid && createAccountForm.repeatPassword.$touched" class="text-danger small">Repeat password.</span>
+            <span ng-if="user.password !== user.repeatPassword && createAccountForm.repeatPassword.$touched" class="text-danger small">Password desn't match.</span>
         </div>
         <div class="checkbox">
             <label>
                 <input type="checkbox" value="terms"> Accept terms and conditions
             </label>
         </div>
-        <button class="btn btn-lg btn-block" ng-disabled="createAccountForm.$invalid || user.password !== user.loginRepeatPassword" type="submit" analytics-on="click" analytics-event="Register account" analytics-category="Actions">Signup</button>
+        <button class="btn btn-lg btn-block" ng-disabled="createAccountForm.$invalid || user.password !== user.repeatPassword" type="submit" analytics-on="click" analytics-event="Register account" analytics-category="Actions">Signup</button>
     </form>
 </div>
