@@ -16,17 +16,20 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $wind
     }
 
     $scope.login = function (username, password) {
-        AuthSvc.login(username, password)
-                .then(function (response) {
-                    $window.localStorage.setItem('token', response.data);
-                    _.defer(function () {
-                        AuthSvc.getUser().then(function (response) {
-                            $rootScope.user = response.data;
-                            $location.path('house');
-                        }, function (err) {
-                            $scope.validationError = err;
-                        });
-                    });
+        AuthSvc.login(username, password).then(function (response) {
+            $window.localStorage.setItem('token', response.data);
+            _.defer(function () {
+                AuthSvc.getUser().then(function (response) {
+                    $rootScope.user = response.data;
+                    $location.path('house');
+                }, function (err) {
+                    $scope.validationError = err;
+                });
+            });
+        })
+                .catch(function (err) {
+                    $scope.validationError = {msg: err.msg ? err.msg : err.data};
+
                 });
     };
 
