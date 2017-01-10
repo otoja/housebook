@@ -17,8 +17,8 @@
         </ul>
     </div>
     <div class="col-md-10">
-        <h2 class='text-uppercase' ng-hide="profileNameIsEditing" ng-dblclick="profileNameIsEditing = true">{{profile.name}}</h2>
-        <input ng-show="profileNameIsEditing" ng-model="profile.name" ng-keydown="$event.which === 13 && updateSection()"  autofocus />
+        <h2 class='text-uppercase' ng-hide="profileNameIsEditing" ng-dblclick="profileNameIsEditing = true;">{{profile.name}}</h2>
+        <input id="edit-profile-name" ng-show="profileNameIsEditing" ng-model="profile.name" ng-keydown="$event.which === 13 && updateSection()" ng-blur="profileNameIsEditing = false" autofocus />
         <div class="house-profile-preferences">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a data-target="#basicInfo" aria-controls="basicInfo" role="tab" data-toggle="tab">Basic info</a></li>
