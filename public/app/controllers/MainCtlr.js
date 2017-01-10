@@ -9,14 +9,13 @@ housebook.controller('MainCtlr', function ($scope, $location, AuthSvc) {
             $scope.$apply();
             $('#modal-feedback').modal('show');
         });
-
     };
 
-    $scope.sentMail = function (email, message) {
+    $scope.sentMail = function (email, message, type) {
         $.ajax({
             url: "/mail",
             method: "POST",
-            data: {content: message, subject: "New contact form pilot application", replyTo: email},
+            data: {content: message, subject: "New contact form pilot application", replyTo: email, type:type},
             dataType: "json"
         }).then(function () {
             _.defer(function () {
@@ -25,24 +24,18 @@ housebook.controller('MainCtlr', function ($scope, $location, AuthSvc) {
         });
         $scope.formSent = true;
     };
-
     $scope.goToResetPasswordForm = function () {
         $("#login-dp-toggle").dropdown("toggle");
         $location.path('/user/reset-password');
     };
-
     $scope.resetPassword = function (email) {
         $scope.success = true;
         $scope.formSent = true;
-
-        AuthSvc.resetPassword(email)
-                .success(function (response) {
-                    console.log(response.data);
-                })
-                .error(function (err) {
-                    $scope.resetPasswordErrorMsg = err;
-                    $scope.success = false;
-                });
+        AuthSvc.resetPassword(email).then(function (response) {
+            console.log(response.data);
+        }, function (err) {
+            $scope.resetPasswordErrorMsg = err;
+            $scope.success = false;
+        });
     };
-
 });

@@ -6,7 +6,7 @@
                 <h4 class="modal-title">Contact Form</h4>
             </div>
             <div class="modal-body">
-                <form name="contactForm" ng-hide="formSent" class="form-landing" ng-submit="sentMail(email, message)">
+                <form name="contactForm" ng-hide="formSent" class="form-landing" ng-submit="sentMail(email, message, 'contact-form')">
                     <div class="form-group">
                         <input type="text" class="form-control" ng-model="email" id="email" placeholder="Email" autofocus="" autocorrect="off" autocapitalize="none"/>
                     </div>

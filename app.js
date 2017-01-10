@@ -9,18 +9,19 @@ var usersAPI = require('./controllers/api/user/user');
 var userPasswordAPI = require('./controllers/api/user/password');
 var sessionAPI = require('./controllers/api/sessions');
 var houseAPI = require('./controllers/api/house');
-var mailerAPI = require('./controllers/api/mailer');
+var mailerAPI = require('./controllers/api/mailer/mailer');
 var awsAPI = require('./controllers/api/aws');
 
 var app = express();
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-if (app.get('env') !== 'development') {
+if (process.env.ENV_TYPE !== 'development') {
     app.use(logger('common', {skip: function (req, res) {
             return res.statusCode < 400;
         }}));
 } else {
+    console.log("Use logger");
     app.use(logger('dev'));
 }
 

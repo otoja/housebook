@@ -7,14 +7,12 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $wind
 
     if ($scope.isResetPassword) {
         $scope.validationError = null;
-        AuthSvc.validateResetPasswordHash($routeParams.token)
-                .success(function (username) {
-                    $scope.username = username;
-                })
-                .error(function (err) {
-                    $scope.resetPasswordTokenIsValid = false;
-                    $scope.validationError = err;
-                });
+        AuthSvc.validateResetPasswordHash($routeParams.token).then(function (username) {
+            $scope.username = username;
+        }, function (err) {
+            $scope.resetPasswordTokenIsValid = false;
+            $scope.validationError = err;
+        });
     }
 
     $scope.login = function (username, password) {
@@ -22,36 +20,29 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $wind
                 .then(function (response) {
                     $window.localStorage.setItem('token', response.data);
                     _.defer(function () {
-                        AuthSvc.getUser()
-                                .success(function (response) {
-                                    $rootScope.user = response.data;
-                                    $location.path('house');
-                                })
-                                .error(function (err) {
-                                    $scope.validationError = err;
-                                });
+                        AuthSvc.getUser().then(function (response) {
+                            $rootScope.user = response.data;
+                            $location.path('house');
+                        }, function (err) {
+                            $scope.validationError = err;
+                        });
                     });
-                })
-                .catch(function (err) {
-                    $scope.validationError = {msg:err.msg?err.msg:err.data};
                 });
     };
 
     $scope.signUp = function (user) {
         AuthSvc.signUp(user).then(function (response) {
-            AuthSvc.login(user.username, user.password)
-                    .success(function (response) {
-                        $window.localStorage.setItem('token', response.data);
-                        _.defer(function () {
-                            AuthSvc.getUser().then(function (response) {
-                                $rootScope.user = response.data;
-                                $location.path('house');
-                            });
-                        });
-                    })
-                    .error(function (err) {
-                        $scope.validationError = err;
+            AuthSvc.login(user.username, user.password).then(function (response) {
+                $window.localStorage.setItem('token', response.data);
+                _.defer(function () {
+                    AuthSvc.getUser().then(function (response) {
+                        $rootScope.user = response.data;
+                        $location.path('house');
                     });
+                });
+            }, function (err) {
+                $scope.validationError = err;
+            });
         }, function (err) {
             $scope.validationError = err.data;
         });
@@ -67,15 +58,13 @@ housebook.controller('LoginCtlr', function ($scope, $rootScope, $location, $wind
 
     $scope.changePassword = function (username, password) {
         $scope.formSent = true;
-        AuthSvc.changePassword(username, password, $scope.isResetPassword)
-                .success(function (response) {
-                    $scope.success = true;
-                    localStorage.setItem('token', response);
-                })
-                .error(function (err) {
-                    $scope.success = false;
-                    $scope.errMsg = err;
-                });
+        AuthSvc.changePassword(username, password, $scope.isResetPassword).then(function (response) {
+            $scope.success = true;
+            localStorage.setItem('token', response);
+        }, function (err) {
+            $scope.success = false;
+            $scope.errMsg = err;
+        });
     };
 
 });
