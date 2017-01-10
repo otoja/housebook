@@ -131,6 +131,9 @@ housebook.controller('HouseProfileCtlr', function ($scope, $rootScope, $sce, $ro
                 });
                 break;
             default:
+                HouseProfileSvc.updateProfile($scope.profile).then(function () {
+                    $scope.profileNameIsEditing = false;
+                });
                 break;
         }
     };

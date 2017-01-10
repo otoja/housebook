@@ -75,7 +75,7 @@ router.post('/', function (req, res, next) {
     }
 
     var auth = jwt.decode(req.headers['x-auth'], config.secret);
-    
+
     var address = new Address({
         street1: req.body.address.street1,
         street2: req.body.address.street2,
@@ -123,6 +123,9 @@ router.put('/:profileId', function (req, res, next) {
         if (err)
             return next(err);
 
+        if (!helper.objectsAreTheSame(req.body.name, house.name)) {
+            house.name = req.body.name;
+        }
         if (!helper.objectsAreTheSame(req.body.type, house.type)) {
             house.type = req.body.type;
         }
