@@ -1,17 +1,18 @@
 var router = require('express').Router();
-var bcrypt = require('bcrypt');
+
 var jwt = require('jwt-simple');
-var filessystem = require('fs');
+var helper = require('../helperFunctions');
 var ObjectId = require('mongodb').ObjectID;
 var config = require('../../config');
-
 
 var House = require('../../model/house');
 var Address = require('../../model/address');
 var User = require('../../model/user');
+var Image = require('../../model/image');
+
 
 router.get('/:profileId', function (req, res, next) {
-    if (!req.headers['x-auth']) {
+    if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
         console.log("Missing token");
         return res.sendStatus(401);
     }
@@ -29,7 +30,7 @@ router.get('/:profileId', function (req, res, next) {
 });
 
 router.post('/:profileId', function (req, res, next) {
-    if (!req.headers['x-auth']) {
+    if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
         console.log("Missing token");
         return res.sendStatus(401);
     }
@@ -38,39 +39,57 @@ router.post('/:profileId', function (req, res, next) {
     House.findOne({"_id": ObjectId(req.params.profileId)}).exec(function (err, house) {
         if (err)
             return next(err);
+        console.log("isProfilePicture " + req.body.isProfilePicture);
 
-        if (req.body.thumbnail && req.body.thumbnail.length) {
-            saveThumbnail(req.params.profileId, req.body.thumbnail);
+        if (req.body.contentType) {
+            console.log("create img object");
+
+            var picture = new Image({
+                path: req.params.profileId + '/' + req.body.fileName,
+                uploaded: new Date(),
+                uploadedBy: req.body.userId
+            });
+            console.log("Prepare img to save with house");
+
+            if (req.body.isProfilePicture) {
+                picture.isProfilePicture = true;
+                house.profilePicture = picture;
+            }
+
+            house.save(function (err) {
+                if (err)
+                    return next(err);
+                console.log("Image saved");
+            });
+
         }
 
         return res.sendStatus(201);
     });
 });
 
+/*Create house profile*/
 router.post('/', function (req, res, next) {
-    if (!req.headers['x-auth']) {
-        console.log("Missing token");
+    if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
         return res.sendStatus(401);
     }
 
     var auth = jwt.decode(req.headers['x-auth'], config.secret);
 
     var address = new Address({
-        street1: req.body.street1,
-        street2: req.body.street2,
-        postalCode: req.body.postCode,
-        city: req.body.city,
-        state: req.body.state,
-        country: req.body.country
+        street1: req.body.address.street1,
+        street2: req.body.address.street2,
+        postalCode: req.body.address.postalCode,
+        city: req.body.address.city,
+        state: req.body.address.state,
+        country: req.body.address.country
     });
-
-    console.log(JSON.stringify(address));
 
     var house = new House({
         name: req.body.name,
         createdBy: req.body.createdBy,
-        builtYear: req.body.buildYear,
         movedInYear: req.body.movedInYear,
+        ownership: req.body.ownership,
         address: address
     });
 
@@ -93,19 +112,76 @@ router.post('/', function (req, res, next) {
     });
 });
 
-
-
-function saveThumbnail(profileId, data) {
-    var base64Data = data.replace(/^data:image\/png;base64,/, "");
-    var dir = __dirname + '/../../uploads/' + profileId;
-    console.log(dir);
-    if (!filessystem.existsSync(dir)) {
-        filessystem.mkdirSync(dir);
+/*Update house profile*/
+router.put('/:profileId', function (req, res, next) {
+    if (!req.headers['x-auth'] || !req.headers['x-auth'].length) {
+        console.log("Missing token");
+        return res.status(401).send("You need to be authenticated to perform this operation");
     }
 
-    filessystem.writeFile(dir + '/thumbnail.png', base64Data, 'base64', function (err) {
-        console.log(err);
+    House.findOne({"_id": ObjectId(req.params.profileId)}).exec(function (err, house) {
+        if (err)
+            return next(err);
+
+        if (!helper.objectsAreTheSame(req.body.name, house.name)) {
+            house.name = req.body.name;
+        }
+        if (!helper.objectsAreTheSame(req.body.type, house.type)) {
+            house.type = req.body.type;
+        }
+        if (!helper.objectsAreTheSame(req.body.movedInYear, house.movedInYear)) {
+            house.movedInYear = req.body.movedInYear;
+        }
+        if (!helper.objectsAreTheSame(req.body.ownership, house.ownership)) {
+            house.ownership = req.body.ownership;
+        }
+        if (!helper.objectsAreTheSame(req.body.builtYear, house.builtYear)) {
+            house.builtYear = req.body.builtYear;
+        }
+        if (!helper.objectsAreTheSame(req.body.storages, house.storages)) {
+            house.storages = req.body.storages;
+        }
+        if (!helper.objectsAreTheSame(req.body.meters, house.meters)) {
+            house.meters = req.body.meters;
+        }
+        if (!helper.objectsAreTheSame(req.body.rooms, house.rooms)) {
+            house.rooms = req.body.rooms;
+        }
+        if (req.body.address) {
+            if (!helper.objectsAreTheSame(req.body.address.street1, house.address.street1)) {
+                house.address.street1 = req.body.address.street1;
+            }
+            if (!helper.objectsAreTheSame(req.body.address.street2, house.address.street2)) {
+                house.address.street2 = req.body.address.street2;
+            }
+            if (!helper.objectsAreTheSame(req.body.address.postalCode, house.address.postalCode)) {
+                house.address.postalCode = req.body.address.postalCode;
+            }
+            if (!helper.objectsAreTheSame(req.body.address.city, house.address.city)) {
+                house.address.city = req.body.address.city;
+            }
+            if (!helper.objectsAreTheSame(req.body.address.state, house.address.state)) {
+                house.address.state = req.body.address.state;
+            }
+            if (!helper.objectsAreTheSame(req.body.address.country, house.address.country)) {
+                house.address.country = req.body.address.country;
+            }
+        }
+        if (!helper.objectsAreTheSame(req.body.facilitiesArr, house.facilities)) {
+            house.facilities = req.body.facilitiesArr;
+        }
+
+        house.save(function (err) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+            return res.sendStatus(201);
+
+        });
     });
-}
+
+
+});
 
 module.exports = router;

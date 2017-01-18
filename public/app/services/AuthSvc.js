@@ -1,8 +1,12 @@
-housebook.service('AuthSvc', function ($q, $http, $location) {
+housebook.factory('AuthSvc', function ($q, $http, $location, $window) {
     var obj = {};
     obj._sessionIsValid = false;
+    obj.sessionIsValid = function () {
+        return $window.localStorage.getItem('token') !== null;
+    };
 
     obj.login = function (username, password) {
+        obj._clearStorage();
         var defered = $q.defer();
         $http.post('/session', {username: username, password: password}).then(function (token) {
             defered.resolve(token);
@@ -13,22 +17,26 @@ housebook.service('AuthSvc', function ($q, $http, $location) {
         return defered.promise;
 
     };
-    obj.signUp = function (model) {
-        return $http.post('/users', JSON.stringify(model));
-    };
     obj.logout = function () {
         this._sessionIsValid = false;
+        obj._clearStorage();
+        $location.path('/welcome');
     };
+    obj.signUp = function (model) {
+        obj._clearStorage();
+        return $http.post('/users', JSON.stringify(model));
+    };
+
     obj.getUser = function () {
         var defer = $q.defer();
-        if (localStorage.getItem('user')) {
-            var user = JSON.parse(localStorage.getItem('user'));
+        if ($window.localStorage.getItem('user')) {
+            var user = JSON.parse($window.localStorage.getItem('user'));
             defer.resolve(user);
         }
 
 
-        $http.get('/users', {headers: {'x-auth': localStorage.getItem('token')}}).then(function (response) {
-            localStorage.setItem('user', JSON.stringify(response.data));
+        $http.get('/users', {headers: {'x-auth': $window.localStorage.getItem('token')}}).then(function (response) {
+            $window.localStorage.setItem('user', JSON.stringify(response.data));
             defer.resolve(response.data);
         }, function (err) {
             defer.reject(err);
@@ -36,13 +44,19 @@ housebook.service('AuthSvc', function ($q, $http, $location) {
 
         return defer.promise;
     };
-    obj.sessionIsValid = function () {
-        return localStorage.getItem('token') !== null;
+
+    obj.resetPassword = function (email) {
+        return $http.get('/users/password/reset/' + email);
     };
-    obj.signOut = function () {
-        localStorage.removeItem('token');
-        $location.path('/welcome');
-        return false;
+    obj.changePassword = function (username, password, isPasswordReset) {
+        return $http.put('/users/password/change/', {username: username, password: password, isPasswordReset:isPasswordReset});
+    };
+    obj.validateResetPasswordHash = function (token) {
+        return $http.get('/users/password/reset/validate/' + token);
+    };
+    obj._clearStorage = function () {
+        $window.localStorage.removeItem('token');
+        $window.localStorage.removeItem('user');
     };
 
     return obj;

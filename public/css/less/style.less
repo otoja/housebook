@@ -1,25 +1,31 @@
 @import "colors.less";
 
 body {
-    padding: 20px;
-    font: 1em/1.750em "Open Sans", sans-serif;
-    font-size: 14pt;
+    padding: 5px;
+    font: "Open Sans", sans-serif;
+    font-size: 12pt;
     padding-bottom: 70px; 
     background-color: @light-grey;
+    color:black;
 }
-
-a {
-    color: @deep-red;
+a, .clicable{
     cursor: pointer;
+}
+a:hover{
+    text-decoration: none;
+}
+a.red {
+    color: @deep-red;
 }
 footer{
     background-color: @light-grey;
     border:none;
 }
-
+.dropdown-menu{
+    font-size: 12pt;
+}
 nav{
-    color:@deep-red !important;
-    font: 300 1.5em/1.1em "Lobster", sans-serif;
+    font: 300 1.5em/1.1em "Open Sans", sans-serif;
     text-align: center;
 
     .navbar-brand{
@@ -49,8 +55,8 @@ nav{
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
-    padding: 10px 40px 20px 40px;
-    margin:20px 0 20px 0;
+    padding: 10px 20px 10px 20px;
+    margin:10px 0 10px 0;
     background-color:white;
 
     input{
@@ -104,8 +110,8 @@ nav{
     display:block;
 
     .house-space-on-grid{
-        width:300px;
-        height:300px;
+        width:280px;
+        height:250px;
         -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
         -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.65);
@@ -114,14 +120,14 @@ nav{
         display:inline-block;
         float:left;
         margin:10px;
-        
+
 
         div.lead, a{
             padding: 10px 10px 0px 10px; 
             color:@deep-red;
             font-family: "Scada";
         }
-        
+
 
         .pull-right>.dropdown-menu{
             right:-180px;
@@ -148,3 +154,45 @@ nav{
     font-size: 18px;
 }
 
+#loading-bar .bar {
+    position: relative;
+    width:100%;
+}
+
+.form-panel{
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.65);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.65);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.65);
+    padding: 10px 20px 10px 20px;
+    background-color: white;
+}
+
+.bg-panel{
+    padding:15px;
+    text-align: center;
+}
+
+.img-description {
+    position: absolute;
+    top: 0;
+    left: 11;
+    bottom:290;
+    right:11;    
+    color: #fff;
+
+    text-align: center;
+    vertical-align: center;
+    visibility: hidden;
+    
+    cursor: pointer;
+
+    /*remove comment if you want a gradual transition between states
+    -webkit-transition: visibility opacity 0.2s;
+    */
+}
+
+
+.img-wrap:hover .img-description {
+    visibility: visible;
+    opacity: 1;
+}
